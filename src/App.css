@@ -1,0 +1,165 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: left;
+}
+.ViewPost {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  a {
+    background-color: #2274A5;
+    margin: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 8px;
+  }
+  h6 {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    
+  }
+  h5 {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    color: #7E2E84;
+  }
+}
+img {
+  height: auto;
+  width: 100%;
+}
+.App{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+h1, h2 {
+  color: #E83F6F;
+}
+h4 {
+  color: #FFBF00;
+}
+button {
+  margin: 10px;
+  color: white;
+  padding: 10px;
+  background-color: #EF798A;
+}
+.menu {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #D14081;
+  color: white;
+  height: 10%;
+  h2 {
+    margin: 10px;
+    color: white;
+  }
+  button {
+    width: 150px;
+    background-color: #D14081;
+  }
+}
+.PassengersPage {
+  display:flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+}
+.AllPosts {
+  width: 100%;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  
+}
+.Card {
+display:flex;
+flex-direction: row;
+padding: 10px;
+width: 30%;
+box-sizing: border-box; 
+margin: 10px;
+}
+.potential-driver {
+  box-shadow: 0 5px 15px #2274A5;
+}
+.no-driver {
+  box-shadow: 0 5px 15px #FFBF00;
+}
+.post-info {
+width: 100%;
+}
+.licensed {
+  color: #2274A5;
+}
+.ImageLink {
+  display:flex;
+  flex-direction: column;
+  width:40%;
+  justify-content: center;
+  align-items: center;
+}
+.Form {
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  input {
+    margin: 5px;
+  }
+  textarea {
+    margin: 10px;
+    padding: 7px;
+    border: 1px solid #CCF5AC;
+    border-radius: 3px;
+  }
+  label {
+    margin: 5px;
+  }
+  select {
+    margin: 10px;
+    border: 1px solid #CCF5AC;
+    border-radius: 3px;
+    padding: 7px;
+  }
+  button{
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+}
+.radio {
+  margin: 10px;
+}
+.input-name {
+  margin: 10px;
+  padding: 7px;
+  border: 1px solid #CCF5AC;
+  border-radius: 3px;
+}
+.error {
+  border: 2px solid red;
+}
