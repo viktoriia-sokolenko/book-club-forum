@@ -5,11 +5,13 @@ import { useState, useEffect } from 'react'
 import { useRoutes, Link } from 'react-router-dom'
 
 const AddPost = ({books, userId, flags}) => {
+    const [message, setMessage] = useState('')
     const [post, setPost] = useState({
       book: '',
       title: '',
       content: '',
       secret_key: '',
+      flag: '',
     })
     const createPost = async (event) => {
         event.preventDefault();
@@ -21,13 +23,21 @@ const AddPost = ({books, userId, flags}) => {
             title: post.title,
             content: post.content,
             secret_key: post.secret_key,
+            flag: post.flag,
           })
           .select();
       
           if (error) {
-            alert("Error adding post: " + error.message);
+            setMessage("Error adding post. Try again please");
           } else {
-            alert("Post added!");
+            setMessage("Post was added successfully!");
+            setPost({
+                book: '',
+                title: '',
+                content: '',
+                secret_key: '',
+                flag: '',
+            });
           }
       }
       return (
@@ -38,16 +48,29 @@ const AddPost = ({books, userId, flags}) => {
             type="text" 
             placeholder="Post Title" 
             value={post.title}
-            onChange={(e) => setPost((prev) => ({ ...prev, title: e.target.value }))}
+            onChange={(e) => {setPost((prev) => ({ ...prev, title: e.target.value }));
+                            setMessage('');}}
             className = "input-name"
+            required
+          />
+          <input
+            type="password" 
+            placeholder="Secret Key (6-15 characters)" 
+            value={post.secret_key}
+            onChange={(e) => setPost((prev) => ({ ...prev, secret_key: e.target.value }))}
+            className = "input-name"
+            minLength={6}
+            maxLength={15}
+            required
           />
           <textarea 
             id="postContent" 
             name="postContent" 
             rows="8" 
-            cols="50" 
+            cols="50"
+            value={post.content}
+            onChange={(e) => setPost((prev) => ({ ...prev, content: e.target.value }))}            
             placeholder="Post something...">
-
             </textarea>
         <div>
         <select
@@ -80,6 +103,7 @@ const AddPost = ({books, userId, flags}) => {
         </div>
         <button type="submit" onClick={createPost}>Post</button>
         </form>
+        {message && <p>{message}</p>}
         </div>
       )
     }

@@ -1,12 +1,13 @@
 import React from 'react';
 import '../App.css'
 import { supabase } from '../client'
-//import Card from '../components/Card.jsx'
+import Card from '../components/Card.jsx'
 import { useState, useEffect } from 'react'
 
 
 const AllPosts = () => {
     const [posts, setPosts] = useState({})
+    const [orderBy, setOrderBy] = useState('created_at')
     const fetchPosts = async () => {
         const {data} = await supabase
           .from('posts')
@@ -19,23 +20,22 @@ const AllPosts = () => {
     }, []);
     return (
         <div className = "PassengersPage">
-        <h2>All Passengers</h2>
-        {/* <div className="AllPassengers">
-            
+        <h2>Discussion Posts</h2>
+        <div className="AllPosts">
             {
                 posts && posts.length > 0 ?
                 posts.map((post) => 
                    <Card 
                         key={post.id} 
-                        id={passenger.id} 
-                        name={passenger.name} 
-                        arrival={passenger.arrival} 
-                        seat={passenger.preferred_seat}
-                        license={passenger.license}
-                        destination = {passenger.destination}/>
-                ) : <h3>{'Add passengers please'}</h3>
+                        id={post.id} 
+                        title={post.title}
+                        content={post.content} 
+                        book={post.book}
+                        upvotes={post.upvotes}
+                        flag = {post.flag}/>
+                ) : <h3>{'No posts yet'}</h3>
             }
-        </div> */}
+        </div>
         </div>  
     )
 

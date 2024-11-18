@@ -3,7 +3,139 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: left;
+  font-family: monospace;
+  font-size: 16px;
+  line-height: 1.5;
 }
+img {
+  height: auto;
+  width: 100%;
+}
+.icons {
+  width: 30px;
+}
+.App{
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+h1, h2 {
+  color: #753742;
+}
+h4 {
+  color: #FFBF00;
+}
+button {
+  margin: 10px;
+  color: #F7F5FB;
+  padding: 10px;
+  background-color: #753742;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+}
+button:hover {
+  border: 1px solid white;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.menu {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #084887;
+  color: white;
+  h2 {
+    margin: 10px;
+    color: white;
+  }
+  button {
+    width: 130px;
+    background-color: #084887;
+    padding: 20px;
+  }
+}
+.PostsPage {
+  display:flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+}
+.AllPosts {
+  width: 100%;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between; 
+}
+
+
+.Card {
+  display:flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box; 
+  margin: 10px;
+  box-shadow: 0 5px 15px #909CC2;
+  background-color: white;
+  button {
+    background-color: transparent;
+    margin: 0px;
+  }
+}
+.upvoteLine{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.preview {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.QuestionFlag {
+  background-color: #EAC435;
+  border-radius: 5px;
+  padding: 5px;
+}
+.AnnouncementFlag {
+  background-color: #03CEA4;
+  border-radius: 5px;
+  padding: 5px;
+}
+.OpinionFlag {
+  background-color: #FB4D3D;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+}
+.post-info {
+width: 100%;
+}
+
 .ViewPost {
   display: flex;
   flex-direction: column;
@@ -30,107 +162,13 @@
     color: #7E2E84;
   }
 }
-img {
-  height: auto;
-  width: 100%;
-}
-.App{
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: center;
-  width: 100%;
-}
-h1, h2 {
-  color: #E83F6F;
-}
-h4 {
-  color: #FFBF00;
-}
-button {
-  margin: 10px;
-  color: white;
-  padding: 10px;
-  background-color: #EF798A;
-}
-.menu {
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  display:flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-evenly;
-  background-color: #D14081;
-  color: white;
-  height: 10%;
-  h2 {
-    margin: 10px;
-    color: white;
-  }
-  button {
-    width: 150px;
-    background-color: #D14081;
-  }
-}
-.PassengersPage {
-  display:flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  text-align: left;
-}
-.AllPosts {
-  width: 100%;
-  display:flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-between;
-  
-}
-.Card {
-display:flex;
-flex-direction: row;
-padding: 10px;
-width: 30%;
-box-sizing: border-box; 
-margin: 10px;
-}
-.potential-driver {
-  box-shadow: 0 5px 15px #2274A5;
-}
-.no-driver {
-  box-shadow: 0 5px 15px #FFBF00;
-}
-.post-info {
-width: 100%;
-}
-.licensed {
-  color: #2274A5;
-}
-.ImageLink {
-  display:flex;
-  flex-direction: column;
-  width:40%;
-  justify-content: center;
-  align-items: center;
-}
+
 .Form {
   width:100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  input {
-    margin: 5px;
-  }
   textarea {
     margin: 10px;
     padding: 7px;
@@ -153,6 +191,9 @@ width: 100%;
 }
 .radio {
   margin: 10px;
+  input {
+    margin: 5px;
+  }
 }
 .input-name {
   margin: 10px;

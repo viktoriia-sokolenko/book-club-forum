@@ -4,24 +4,25 @@ import { supabase } from '../client'
 import { useState, useEffect } from 'react'
 
 const EditPost = ({books, flags, userId}) => {
-    const {id} = useParams();
+    const [message, setMessage] = useState('');
+    const {post_id} = useParams();
     const [post, setPost] = useState({
         book: '',
         title: '',
         content: '',
         secret_key: '',
+        flag: '',
       });
     const deletePost = async (event) => {
         event.preventDefault();
         const {error} = await supabase
             .from('posts')
             .delete()
-            .eq('id', passenger.id); 
+            .eq('id', post_id); 
         if (error) {
-            alert("Error deleting passenger: " + error.message);
+            setMessage("Error deleting post");
         } else {
-            alert("Passenger deleted!");
-            window.location = "/all";
+            window.location = `/posts/${userId}`;
         }
     }
     useEffect(() => {
@@ -29,33 +30,34 @@ const EditPost = ({books, flags, userId}) => {
             const { data, error } = await supabase
                 .from('posts')
                 .select()
-                .eq('id', id)
+                .eq('id', post_id)
                 .single();
 
             if (error) {
-                alert("Error fetching posts:", error.message);
+                setMessage("Error fetching posts.");
             } else {
-                setPassenger(data);
+                setPost(data);
+                setMessage('');
             }
         };
 
         fetchPost();
-    }, [id]);
+    }, [post_id]);
     const updatePost = async (event) => {
         event.preventDefault();
       
         const { data, error }  = await supabase
-                                        .from('Passengers')
+                                        .from('posts')
                                         .update({book: post.book,
                                             title: post.title,
                                             content: post.content,
-                                            secret_key: post.secret_key})
-                                        .eq('id', id);
+                                            secret_key: post.secret_key,
+                                            flag: post.flag})
+                                        .eq('id', post_id);
         if (error) {
-        console.error("Error updating post:", error.message);
+        setMessage("Error updating post. Try again please.");
     } else {
-        alert("Passenger updated!");
-        window.location = "/all";
+        setMessage("Post updated successfully!");
     }
       }
       return (
@@ -67,29 +69,42 @@ const EditPost = ({books, flags, userId}) => {
             placeholder="Post Title" 
             value={post.title}
             onChange={(e) => setPost((prev) => ({ ...prev, title: e.target.value }))}
+            className = "input-name"
+          />
+          <input
+            type="password" 
+            placeholder="Secret Key (6-15 characters)"
+            value={post.secret_key}
+            onChange={(e) => setPost((prev) => ({ ...prev, secret_key: e.target.value }))}
+            className = "input-name"
+            minLength={6}
+            maxLength={15}
           />
           <textarea 
             id="postContent" 
             name="postContent" 
             rows="8" 
-            cols="50" 
-            placeholder="Content (optiional)">
-                
-            </textarea>
-        <label>
-        Book (optional):
-        </label>
+            cols="50"
+            value={post.content}
+            onChange={(e) => setPost((prev) => ({ ...prev, content: e.target.value }))}
+            placeholder="Post something..."
+        ></textarea>
+        <div>
         <select
             value={post.book}
             onChange={(e) => setPost((prev) => ({ ...prev, book: e.target.value }))}
         >
+            <option value="">
+            Choose a book
+            </option>
             {books.map((book) => (
             <option key={book} value={book}>
                 {book}
             </option>
             ))}
         </select>
-        <div>
+        </div>
+        <div className = "radio">
           {flags.map((flag) => (
           <label key={flag}>
             <input
@@ -103,8 +118,9 @@ const EditPost = ({books, flags, userId}) => {
           </label>
         ))}
         </div>
-        <button type="submit" onClick={updatePost}>Submit</button>
+        <button type="submit" onClick={updatePost}>Update Post</button>
         </form>
+        {message && <p>{message}</p>}
         <button onClick={deletePost}>Delete post</button>
         </div>
       )

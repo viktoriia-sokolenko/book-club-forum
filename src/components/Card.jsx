@@ -1,28 +1,47 @@
 import React from "react";
-import Driver from '../assets/driver.jpg'
-import Passenger from '../assets/passenger.png'
-import { useRoutes, Link } from 'react-router-dom'
+import { useState } from "react";
+import { Link } from 'react-router-dom'
+import { supabase } from '../client'
+import UpvoteIcon from '../assets/upvote.jpg'
+import UpvotedIcon from '../assets/upvoted.jpg'
 
-const Card = (props) => {
+const Card = ({ id, title, content, upvotes, flag, book }) => {
+    const [postUpvotes, setPostUpvotes] = useState(upvotes)
+    const [upvoted, setUpvoted] = useState(false);
+    const handleUpvote = async () => {
+        if (!upvoted) {
+            setUpvoted(!upvoted);
+        }
+        const { error }  = await supabase
+                                        .from('posts')
+                                        .update({upvotes: (postUpvotes + 1)})
+                                        .eq('id', id);
+        if (error) {
+        console.error("Error updating post:", error.message);
+        }
+        else {
+            setPostUpvotes (postUpvotes + 1)
+        }
+    };
     return (
-        
-        <div className = {`Card ${props.license ? 'potential-driver' : 'no-driver'}`}>
-                <div className = "ImageLink">
-                    <img 
-                    className = "icons"
-                    src={props.seat=='driver' ? Driver : Passenger}
-                    alt={`Passenger Icon`}
-                />
+        <div className = "Card">
+                <div className="">
+                    <span className={`${flag}Flag`}>{flag}</span>
+                    <h5>{title}</h5>
+                    <h5>{book}</h5>
+                    <p className="preview">{content}</p>
+                    <Link to={`/view/${id}`} key={id}>More...</Link>
                     
                 </div>
-                <div className="passenger-info">
-                    <h5>{post.title}</h5>
-                    <p>{post.content}</p>
-                    <strong>Destination: </strong> <span>{props.destination}</span> <br/>
-                    <strong> Preferred Arrival Time: </strong> <span>{props.arrival}</span> <br />
-                    <strong> Has driver's license: </strong> <span>{props.license? "Yes": "No"}</span> <br />
-                    <Link to={`/view/${props.id}`} state={{ passenger: props }} key={props.id}>More...</Link>
-                    
+                <div className="upvoteLine">
+                    <button onClick={handleUpvote}>
+                        <img 
+                            className = "icons"
+                            src={upvoted ? UpvotedIcon : UpvoteIcon}
+                            alt={`Upvote Icon`}
+                        />
+                    </button>
+                    <p>{postUpvotes}</p>
                 </div>
                 
         </div>

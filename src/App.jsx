@@ -15,7 +15,7 @@ import { customAlphabet } from 'nanoid';
 function App() {
   const books = ['Beartown', 'Normal People', 'The Vanishing Half', 'The Nightingale', 'Small Things Like This']
   const flags = ['Question', 'Opinion', 'Announcement'];
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState(() => localStorage.getItem('userId'));
   const [inputId, setInputId] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const checkId = async (e) => {
@@ -32,6 +32,7 @@ function App() {
       }
   
       if (data.length === 1) {
+        localStorage.setItem('userId', inputId);
         setUserId(inputId);
         setErrorMessage('');
       } else {
@@ -51,8 +52,14 @@ function App() {
       alert('Error creating new user. Please try again.');
     }
     else {
-    setUserId(data[0].id);
+      const newUserId = data[0].id;
+      localStorage.setItem('userId', newUserId);
+      setUserId(newUserId);
     }
+  };
+  const logout = () => {
+    localStorage.removeItem('userId'); // Remove userId from localStorage
+    setUserId(null);
   };
   let element = useRoutes([
     {
@@ -100,7 +107,6 @@ function App() {
             />
             {errorMessage && <p>{errorMessage}</p>}
             <button type="submit">Submit</button>
-            <button type="submit">Submit</button>
           </form>
         </div>
       )
@@ -112,6 +118,7 @@ function App() {
           <Link to={`/posts/${userId}`}><button className="sideButton"> My Posts </button></Link>
           <Link to="/all"><button className="sideButton"> All Posts  </button></Link>
           <Link to="/new"><button className="sideButton"> Add Post </button></Link>
+          <button onClick={logout}>Logout</button>
         </div>
           {element}
       </div>)
