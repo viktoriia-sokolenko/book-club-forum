@@ -2,10 +2,13 @@ import React from 'react';
 import { useParams } from 'react-router-dom'
 import { supabase } from '../client'
 import { useState, useEffect } from 'react'
+import Comment from '../components/Comment.jsx'
+import * as Unicons from '@iconscout/react-unicons'
 
-const EditPost = ({books, flags, userId}) => {
+const EditPost = ({books, flags, userId, formatDate}) => {
     const [message, setMessage] = useState('');
     const {post_id} = useParams();
+    const [comments, setComments] = useState([]);
     const [post, setPost] = useState({
         book: '',
         title: '',
@@ -26,6 +29,17 @@ const EditPost = ({books, flags, userId}) => {
         }
     }
     useEffect(() => {
+        const fetchComments = async () => {
+            const {data, error} = await supabase
+              .from('comments')
+              .select()
+              .eq('post_id', post_id);
+            if (error) {
+                setMessage('Error fetching comments. Try updating the page.');
+            } else {
+                setComments(data);
+            }
+        }
         const fetchPost = async () => {
             const { data, error } = await supabase
                 .from('posts')
@@ -42,6 +56,7 @@ const EditPost = ({books, flags, userId}) => {
         };
 
         fetchPost();
+        fetchComments();
     }, [post_id]);
     const updatePost = async (event) => {
         event.preventDefault();
@@ -62,7 +77,10 @@ const EditPost = ({books, flags, userId}) => {
       }
       return (
         <div>
+        <div className="row">
         <h1>Edit Post</h1>
+        <button onClick={deletePost} className="buttonIcon"><Unicons.UilTrash size="30" color="#00AF54"/></button>
+        </div>
         <form className = "Form">
           <input
             type="text" 
@@ -121,7 +139,20 @@ const EditPost = ({books, flags, userId}) => {
         <button type="submit" onClick={updatePost}>Update Post</button>
         </form>
         {message && <p>{message}</p>}
-        <button onClick={deletePost}>Delete post</button>
+        <div className="Comments">
+            {
+                comments && comments.length > 0 ?
+                comments.map((comment) => 
+                <Comment key = {comment.id}
+                        id = {comment.id} 
+                        date = {formatDate(comment.created_at)} 
+                        content = {comment.content} 
+                        user_id = {comment.user_id}
+                        post_id = {comment.post_id}
+                        loggedIn = {true}/>
+                ) : <p>No comments</p>
+            }
+        </div>
         </div>
       )
 }

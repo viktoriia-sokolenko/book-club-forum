@@ -2,10 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { Link } from 'react-router-dom'
 import { supabase } from '../client'
-import UpvoteIcon from '../assets/upvote.jpg'
-import UpvotedIcon from '../assets/upvoted.jpg'
+import * as Unicons from '@iconscout/react-unicons'
 
-const Card = ({ id, title, content, upvotes, flag, book }) => {
+const Card = ({ id, title, content, upvotes, flag, book, date }) => {
     const [postUpvotes, setPostUpvotes] = useState(upvotes)
     const [upvoted, setUpvoted] = useState(false);
     const handleUpvote = async () => {
@@ -27,19 +26,22 @@ const Card = ({ id, title, content, upvotes, flag, book }) => {
         <div className = "Card">
                 <div className="">
                     <span className={`${flag}Flag`}>{flag}</span>
-                    <h5>{title}</h5>
-                    <h5>{book}</h5>
+                    <h3>{title}</h3>
+                    <div className="row">
+                        {book && <h5>#{book}</h5>}
+                        <h6>  | Posted {date}</h6>
+                    </div>
                     <p className="preview">{content}</p>
                     <Link to={`/view/${id}`} key={id}>More...</Link>
                     
                 </div>
                 <div className="upvoteLine">
                     <button onClick={handleUpvote}>
-                        <img 
-                            className = "icons"
-                            src={upvoted ? UpvotedIcon : UpvoteIcon}
-                            alt={`Upvote Icon`}
-                        />
+                        {upvoted ? 
+                        <Unicons.UilThumbsUp size="20" color="#004266"/>
+                        :
+                        <Unicons.UilThumbsUp size="20" color="#FFBC42"/>
+                        }
                     </button>
                     <p>{postUpvotes}</p>
                 </div>

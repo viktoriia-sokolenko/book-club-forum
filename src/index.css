@@ -19,7 +19,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #F7F5FB;
+  background-color: #F7F3F2;
 }
 
 @media (prefers-color-scheme: light) {

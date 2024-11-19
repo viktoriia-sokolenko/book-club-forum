@@ -4,7 +4,7 @@ import { supabase } from '../client'
 import { useState, useEffect } from 'react'
 import { useRoutes, Link } from 'react-router-dom'
 
-const AddPost = ({books, userId, flags}) => {
+const AddPost = ({books, userId, flags, formatDate}) => {
     const [message, setMessage] = useState('')
     const [post, setPost] = useState({
       book: '',
@@ -15,6 +15,10 @@ const AddPost = ({books, userId, flags}) => {
     })
     const createPost = async (event) => {
         event.preventDefault();
+        if (!post.title || !post.secret_key) {
+            setMessage("Title and Secret Key are required.");
+            return;
+        }
         const { error } = await supabase
           .from('posts')
           .insert({
@@ -24,11 +28,13 @@ const AddPost = ({books, userId, flags}) => {
             content: post.content,
             secret_key: post.secret_key,
             flag: post.flag,
+            upvotes: 0,
           })
           .select();
       
           if (error) {
             setMessage("Error adding post. Try again please");
+            console.log(error.message)
           } else {
             setMessage("Post was added successfully!");
             setPost({

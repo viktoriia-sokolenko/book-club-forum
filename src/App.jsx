@@ -1,5 +1,4 @@
 import { supabase } from './client'
-import { v4 as uuidv4 } from 'uuid';
 import { useState, useEffect } from 'react'
 import { useRoutes, Link } from 'react-router-dom'
 import './App.css'
@@ -9,12 +8,28 @@ import EditPost from './pages/EditPost';
 import AddPost from './pages/AddPost';
 import ViewPost from './pages/ViewPost.jsx';
 import Home from './pages/Home.jsx';
-import { customAlphabet } from 'nanoid';
 
 
 function App() {
   const books = ['Beartown', 'Normal People', 'The Vanishing Half', 'The Nightingale', 'Small Things Like This']
   const flags = ['Question', 'Opinion', 'Announcement'];
+  const formatDate = (timestamp) => {
+    const now = Date.now();
+    const postTime = new Date(timestamp).getTime();
+    const diffInMs = now - postTime; 
+    const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    const diffInDays = Math.floor(diffInHours / 24);
+    if (diffInMinutes < 1) {
+        return 'just now';
+    } else if (diffInMinutes < 60) {
+        return `${diffInMinutes} minute${diffInMinutes > 1 ? 's' : ''} ago`;
+    } else if (diffInHours < 24) {
+        return `${diffInHours} hour${diffInHours > 1 ? 's' : ''} ago`;
+    } else {
+        return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
+    }
+};
   const [userId, setUserId] = useState(() => localStorage.getItem('userId'));
   const [inputId, setInputId] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -58,8 +73,9 @@ function App() {
     }
   };
   const logout = () => {
-    localStorage.removeItem('userId'); // Remove userId from localStorage
+    localStorage.removeItem('userId');
     setUserId(null);
+    window.location = `/`;
   };
   let element = useRoutes([
     {
@@ -68,23 +84,23 @@ function App() {
     },
     {
       path: "/all",
-      element:<AllPosts/>
+      element:<AllPosts userId = {userId} books = {books} formatDate = {formatDate}/>
     },
     {
       path:"/edit/:post_id",
-      element: <EditPost books = {books} flags = {flags} userId = {userId}/>
+      element: <EditPost books = {books} flags = {flags} userId = {userId} formatDate = {formatDate}/>
     },
     {
       path:"/posts/:user_id",
-      element: <MyPosts books = {books} flags = {flags} userId = {userId}/>
+      element: <MyPosts books = {books} flags = {flags} userId = {userId} formatDate = {formatDate}/>
     },
     {
       path:"/view/:post_id",
-      element: <ViewPost />
+      element: <ViewPost userId = {userId} formatDate = {formatDate}/>
     },
     {
       path:"/new",
-      element: <AddPost books = {books} flags = {flags} userId = {userId}/>
+      element: <AddPost books = {books} flags = {flags} userId = {userId} formatDate = {formatDate}/>
     }
   ]);
   return (
@@ -92,6 +108,7 @@ function App() {
       {userId === null ?
       (
         <div>
+          <h1>Welcome to our Book Community!</h1>
           <h2>Choose an option:</h2>
           <p>If you are a new user:</p>
           <button onClick={createUser}>Get my user ID</button>
@@ -103,7 +120,7 @@ function App() {
               value={inputId}
               onChange={(e) => setInputId(e.target.value)}
               placeholder="User ID"
-              className={errorMessage ? 'input-field error' : 'input-field'}
+              className={errorMessage ? 'input-name-2 error' : 'input-name-2'}
             />
             {errorMessage && <p>{errorMessage}</p>}
             <button type="submit">Submit</button>

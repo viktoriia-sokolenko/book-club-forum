@@ -1,14 +1,14 @@
 import React from 'react'
+import Books from '../assets/books.jpg'
 const Home = () => {
     return (
         <div>
-            <h2>Welcome to Carpooling App</h2>
-            <p>Here you can plan your journey by adding potential passengers and checking your readiness to the trip.</p>
-            {/* <img 
-                    className = "icons"
-                    src={Car}
-                    alt={`Friends in a car`}
-                /> */}
+            <h2>Welcome to our Book Club</h2>
+            <p>Here you can discuss the books we read and share your love for reading with others.</p>
+            <img
+                    src={Books}
+                    alt={`A stack of books with a coffee cup on top`}
+                />
         </div>
     )
 }
