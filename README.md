@@ -1,14 +1,12 @@
 # Web Development Final Project - *Book Club Forum*
 
-**Viktoriia Sokolenko**
+**By Viktoriia Sokolenko**
 
-This web app: **allows users on the book club forum to interact with each other via discussion posts**
+This web app **allows users on the book club forum to interact with each other via discussion posts**
 
 Time spent: **20** hours spent in total
 
-## Required Features
-
-The following **required** functionality is completed:
+## Features
 
 - [X] **A create form that allows the user to create posts**
 - [X] **Posts have a title and optionally additional textual content and/or an image added as an external image URL**
@@ -21,9 +19,7 @@ The following **required** functionality is completed:
 - [X] **Users can leave comments underneath a post on the post's separate page**
 - [X] **Each post should have an upvote button on the post's page. Each click increases its upvotes count by one and users can upvote any number of times**
 - [X] **A previously created post can be edited or deleted from its post page**
-
-The following **optional** features are implemented:
-
+      
 - [X] Users can only edit and deleted posts or delete comments by entering the secret key, which is set by the user during post creation
 - [X] Upon launching the web app, the user is assigned a random user ID. It will be associated with all posts and comments that they make and displayed on them.
 - [X] Users can set flags while creating a post. Then users can filter posts by flags on the home feed.
@@ -36,10 +32,6 @@ Here's a walkthrough of implemented user stories:
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with Kap 
-
-## Notes
-
-Describe any challenges encountered while building the app.
 
 ## License
 
