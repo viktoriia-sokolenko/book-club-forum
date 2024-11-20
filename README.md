@@ -1,8 +1,10 @@
-# Web Development Final Project - *Book Club Forum*
+# CodePath Web Development Final Project - *Book Club Forum*
 
 **By Viktoriia Sokolenko**
 
-This web app **allows users on the book club forum to interact with each other via discussion posts**
+This web app allows users on the book club forum to interact with each other via discussion posts.
+
+**The app has been successfully deployed.** You can check it out <a href='https://book-club-discuss.netlify.app/'> here</a> !
 
 Time spent: **20** hours spent in total
 
