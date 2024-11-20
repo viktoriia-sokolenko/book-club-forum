@@ -103,6 +103,25 @@ function App() {
       element: <AddPost books = {books} flags = {flags} userId = {userId} formatDate = {formatDate}/>
     }
   ]);
+  useEffect(() => {
+    const adjustMargin = () => {
+      const menuElement = document.querySelector(".menu");
+      const appElement = document.querySelector(".App");
+      
+      if (menuElement && appElement) {
+        const menuHeight = menuElement.offsetHeight;
+        appElement.style.marginTop = `${menuHeight}px`;
+      } else if (appElement) {
+        appElement.style.marginTop = "0px";
+      }
+    };
+  
+    adjustMargin();
+    window.addEventListener("resize", adjustMargin);
+    return () => {
+      window.removeEventListener("resize", adjustMargin);
+    };
+  }, []);
   return (
     <div>
       {userId === null ?
