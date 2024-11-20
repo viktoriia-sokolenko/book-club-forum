@@ -3,10 +3,11 @@
 **By Viktoriia Sokolenko**
 
 This web app allows users on the book club forum to interact with each other via discussion posts.
+Time spent: **20** hours spent in total.
 
-**The app has been successfully deployed.** You can check it out <a href='https://book-club-discuss.netlify.app/'> here</a> !
+## The app has been successfully deployed
 
-Time spent: **20** hours spent in total
+You can check it out <a href='https://book-club-discuss.netlify.app/'> here</a> !
 
 ## Features
 
