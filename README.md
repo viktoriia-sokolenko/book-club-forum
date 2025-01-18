@@ -3,6 +3,8 @@
 **By Viktoriia Sokolenko**
 
 This web app allows users on the book club forum to interact with each other via discussion posts.
+
+
 Time spent: **20** hours spent in total.
 
 ## The app has been successfully deployed
